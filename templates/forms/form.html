@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<form method="POST">
+		<select data-placeholder="begin typinr.." multiple="" class="chosen-select" name="skills">
+			<option value=""></option>
+			<option value="c">c</option>
+			<option value="c++">c++</option>
+			<option value="HTML">HTML</option>
+			<option value="CSS">CSS</option>
+		</select>
+	</form>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+<!--	def __init__(self, *args, **kwargs):
+		super().__init__(*args , **kwargs)
+
+		works = WorkProfile.objects.filter(JobApplication = self.instance)
+		for i in range(len(works)+1):
+			field_name = 'workprofile_%s' % (i,)
+			self.fields[field_name] = forms.CharField(requierd=False)
+			try:
+				self.initial[field_name] = works[i].company_name
+			except IndexError:
+				self.initial[field_name] = ""
+		field_name = 'workprofile_%s' % (i+1)
+
+		self.fields[field_name] = forms.CharField(requierd=False)
+	def clean(self):
+		works = set()
+		i=0
+		field_name = 'workprofile_%s' % (i,)
+
+		while self.cleaned_data.get(field_name):
+			work = self.cleaned_data[field_name]
+			if work in works:
+				self.add_error(field_name, 'Duplicate')
+			else:
+				works.add(work)
+			i+=1
+			field_name = 'workprofile_%s' % (i,)
+		self.cleaned_data["works"] = works
+
+	def save(self):
+		jobapplication = self.instance
+		jobapplication.applyas = self.cleaned_data["applyas"]
+		jobapplication.college_name = self.cleaned_data["college_name"]
+		jobapplication.course_name = self.cleaned_data["course_name"]
+		jobapplication.passing_year = self.cleaned_data["passing_year"]
+		jobapplication.grade = self.cleaned_data["grade"]
+		jobapplication.aboutapplicant = self.cleaned_data["aboutapplicant"]
+		jobapplication.work_set.all().delete()
+		for work in self.cleaned_data["works"]:
+			WorkProfile.objects.create(jobapplication = jobapplication, company_name = work,)-->

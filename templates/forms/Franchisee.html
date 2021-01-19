@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div class="container">
+		{% if companyexist %}
+			<form method="POST">
+				{% csrf_token %}
+				{{ franchiseeform.as_p }}
+				<input type="submit" name="">
+				}
+			</form>
+		{% else %}
+			<h2>No company</h2>
+		{% endif %}
+	</div>
+</body>
+</html>

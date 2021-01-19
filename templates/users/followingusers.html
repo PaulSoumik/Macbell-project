@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.userlist ul{
+			list-style: none;
+			margin: 0 auto;
+			font-family: sans-serif;
+			padding: 0;
+		}
+		.userlist ul li{
+
+			max-width: 90%;
+			margin: 0 auto;
+			display: flex; 
+			flex-direction: row; 
+			align-items: center;
+			justify-content: space-between;
+			background: #efefef;
+			border-radius: 0.435rem;
+			padding: 1rem;
+			margin-bottom: 1rem;
+		}
+		.userlist ul li button{
+			color: #fff;
+			border: none;
+			border-radius: 0.432rem;
+			background: #55f;
+			padding: 0.3rem;
+		}
+		.userlist ul li a{
+			text-decoration: none;
+			padding: 0.4em;
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="userlist">
+		<ul>
+			{% for user in followingusers %}
+				<li style="">
+					<h3>{{user.following.username}}</h3> <button style=""><a href="{% url 'users:unfollow' user.id %}">unfollow</a></button>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+
+
+</body>
+</html>

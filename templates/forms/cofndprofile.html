@@ -1,0 +1,338 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>co-founder profile</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+
+
+    <style> 
+        h1 { 
+            color: green; 
+        } 
+  
+        .multipleSelection { 
+            width: 300px; 
+            background-color: #BCC2C1; 
+        } 
+  
+        .selectBox { 
+            position: relative; 
+        } 
+  
+        .selectBox select { 
+            width: 100%; 
+            font-weight: bold; 
+        } 
+  
+        .overSelect { 
+            position: absolute; 
+            left: 0; 
+            right: 0; 
+            top: 0; 
+            bottom: 0; 
+        } 
+  
+        #checkBoxes { 
+            display: none; 
+            border: 1px #8DF5E4 solid; 
+        } 
+  
+        #checkBoxes label { 
+            display: block; 
+        } 
+  
+        #checkBoxes label:hover { 
+            background-color: #4F615E; 
+        }
+
+        .edu{
+            padding: 1rem;
+        } 
+    </style> 
+</head>
+<body>
+
+        <form enctype="multipart/form-data" method="POST" action="">
+              {% csrf_token %}
+
+            <p>
+                <label for="id_im">Im:</label> 
+                <select name="im" required="" id="id_im">
+                    <option value="" selected="">---------</option>
+
+                    <option value="student">student</option>
+
+                    <option value="enterpreneur">enterpreneur</option>
+
+                    <option value="Businessman">Businessman</option>
+
+                    <option value="Investor">Investor</option>
+
+                    <option value="Freelancers">Freelancers</option>
+
+                    <option value="Student Enterpreneur">Student Enterpreneur</option>
+
+                </select>
+            </p>
+            <p>
+                <label for="id_looking_for">Looking for:</label> 
+                <select name="looking_for" required="" id="id_looking_for">
+                    <option value="" selected="">---------</option>
+
+                    <option value="startup-idea">startup-idea</option>
+
+                    <option value="startup-company">startup-company</option>
+
+                </select>
+            </p>
+            <p><label for="id_industry">Industry:</label> <input type="text" name="industry" maxlength="200" required="" id="id_industry"></p>
+            <p><label for="id_join_startup_as">Join startup as:</label> <select name="join_startup_as" required="" id="id_join_startup_as">
+              <option value="" selected="">---------</option>
+
+              <option value="cofounder">cofounder</option>
+
+              <option value="team-member">team-member</option>
+
+              <option value="partner">partner</option>
+
+              <option value="others">others</option>
+
+            </select></p>
+            <p><label for="id_workat">Workat:</label> <input type="text" name="workat" maxlength="200" id="id_workat"></p>
+            <p><label for="id_education">Education:</label> </p>
+                <p><label for="id_college_name">College name:</label> <input type="text" name="college_name" maxlength="200" id="id_college_name"></p>
+                <p><label for="id_course_name">Course name:</label> <input type="text" name="course_name" maxlength="200" id="id_course_name"></p>
+                <p><label for="id_passing_year">Passing year:</label> <input type="text" name="passing_year" required="" id="id_passing_year"></p>
+                <p><label for="id_grade">Grade:</label> <input type="number" name="grade" value="0" required="" id="id_grade"></p>
+            <p class="select-skill">
+                <label for="id_skills">Skills:</label> 
+                            
+                <select name="skills" id="id_skills" multiple="" style="overflow: visible; display: none;" >
+                    {% for theskill in Skills.all%}
+                        <option value="{{ theskill.id }}">{{ theskill.name }}</option>
+                    {% endfor %}
+
+                </select>
+            </p>
+
+
+
+                <div class="multipleSelection"> 
+                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." style="width: 100%;">
+                    <div class="selectBox" 
+                        onclick="showCheckboxes()"> 
+                        <select name="" id=""> 
+                            <option>Select options</option> 
+                        </select> 
+                        <div class="overSelect"></div> 
+                    </div> 
+          
+                    <div id="checkBoxes"> 
+                            {% for theskill in Skills.all%}
+                                <label for="{{ theskill.id }}"> 
+                                    <input type="checkbox" id="{{ theskill.name }}" class="{{ theskill.id }}" /> 
+                                    {{ theskill.name }}
+                                </label> 
+                            {% endfor %}
+                        
+                    </div> 
+                </div> 
+            <p><label for="id_aboutyourself">Aboutyourself:</label> <input type="text" name="aboutyourself" maxlength="400" id="id_aboutyourself"></p>
+                          
+            <h3>Experience:</h3>
+
+            <div class="experience">
+                {{ expform.management_form }}
+                {% for form in expform.forms %}
+                {{ form.errors }}
+                    <div class="no-error">
+                        <p>
+                            <label for="id_form-0-ex_company_name">Ex company name:</label> 
+                            <select name="form-0-ex_company_name" id="id_form-0-ex_company_name">
+                                    <option value="" selected="">---------</option>
+
+                                    
+                                    {% for company in companies.all %}
+                                        <option value="{{ company.id }}">{{ company.company_name }}</option>
+                                    {% endfor %}
+
+                            </select>
+                        </p>
+                        <p>
+                            <label for="id_form-0-job_post">Job post:</label> 
+                            <input type="text" name="form-0-job_post" maxlength="300" id="id_form-0-job_post">
+                        </p>
+                        <p>
+                            <label for="id_form-0-starting_date">Starting date:</label> 
+                            <input type="date" name="form-0-starting_date" id="id_form-0-starting_date">
+                        </p>
+                        <p>
+                            <label for="id_form-0-ending_date">Ending date:</label> 
+                            <input type="date" name="form-0-ending_date" id="id_form-0-ending_date">
+                        </p>
+                    </div>
+                    {% endfor %}
+                    <div class="addmore" id="clicktoadd" onclick="addnew()" style="cursor: pointer; text-decoration: underline;">
+                        Add new experience
+                    </div>
+            </div>           
+
+              
+              <input type="submit" name="" value="Register" class="regis-sub" style="">
+        </form>
+
+
+    <div id="empty_exp_form" style="display: none;">
+        <table class="no_error">
+            <tbody>
+                <tr>
+                    <th>
+                        <label for="id_form-__prefix__-ex_company_name">Ex company name:</label>
+                    </th>
+                    <td>
+                        <select name="form-__prefix__-ex_company_name" id="id_form-__prefix__-ex_company_name">
+                            <option value="" selected="">---------</option>
+
+                            <option value="1">AnAlyst2</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="id_form-__prefix__-job_post">Job post:</label>
+                    </th>
+                    <td>
+                        <input type="text" name="form-__prefix__-job_post" maxlength="300" id="id_form-__prefix__-job_post">
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="id_form-__prefix__-starting_date">Starting date:</label>
+                    </th>
+                    <td>
+                        <input type="date" name="form-__prefix__-starting_date" id="id_form-__prefix__-starting_date">
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="id_form-__prefix__-ending_date">Ending date:</label>
+                    </th>
+                    <td>
+                        <input type="date" name="form-__prefix__-ending_date" id="id_form-__prefix__-ending_date">
+                    </td>
+                </tr>
+            </tbody></table>
+    </div>
+
+    
+
+
+    <script type="text/javascript">
+        var edunum = 1;
+        function myfunc() {
+            var form_idx = $('#id_form-TOTAL_FORMS').val();
+            $('.experience').append($('#empty_exp_form').html().replace(/__prefix__/g, form_idx));
+            $('#id_form-TOTAL_FORMS').val(parseInt(form_idx) +1);
+        }
+        document.getElementById("clicktoadd").addEventListener("click",myfunc);
+    </script>
+    <script> 
+        var show = true; 
+        
+        function showCheckboxes() { 
+            var checkboxes =  
+                document.getElementById("checkBoxes"); 
+  
+            if (show) { 
+                checkboxes.style.display = "block"; 
+                show = false; 
+            } else { 
+                checkboxes.style.display = "none"; 
+                show = true; 
+            } 
+        } 
+
+    </script> 
+    <script type="text/javascript">
+        jQuery(document).ready(function ($){
+            $("select-skill").css("display","none");
+
+
+        })
+    </script>
+    <script type="text/javascript">
+            $('input[type="checkbox"]').click(function(){
+                if($(this).prop("checked") == true){
+                    var theid = $(this).attr("class");
+                    //alert(theid);
+                    cls = "#id_skills option[value =" +'"'+ theid +'"'+"]";
+                    //alert(cls);
+                    //var opt = document.getElementsByClassName(cls);
+                    $("#id_skills option[value =" + theid +"]").prop("selected",true);
+                    //alert($(cls).text())
+                    //$(cls).setAttribute("selected","selected");
+                    $(cls).prop("selected",true);
+                   //alert($(cls).attr('value'))
+
+                    
+                }
+
+            })
+    </script>
+
+
+    <!--<script type="text/javascript">
+        function searchfunc(){
+            var input, filter, checkbox, label, ckeckboxinput,i=0;
+            input = document.getElementById('theinput');
+            filter = input.value.toUpperCase();
+            checkbox = document.getElementById("checkBoxes");
+            label = $("#checkBoxes label");
+            checkboxdatas = $("#checkBoxes label input");
+            for(i=0;i<label.length;i++){
+                checkboxinput = checkboxdatas[i];
+                textvalue = checkboxinput.textContent || checkboxinput.innerText;
+                if(textvalue.toUpperCase().indexOf(filter)> -1){
+                    li[i].style.display = "block";
+                }
+                else{
+                    li[i].style.display = "none";
+                }
+            }
+
+        }
+    </script>-->
+<script>
+    function myFunction() {
+
+        $("#checkBoxes").css("display","block");
+  // Declare variables
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('myInput');
+  filter = input.value.toUpperCase();
+   if(!filter){
+    $("#checkBoxes").css("display","none");
+  }
+  ul = document.getElementById("checkBoxes");
+  li = ul.getElementsByTagName('label');
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("input")[0];
+    b = $("#checkBoxes label input[type='checkbox']").eq(i);
+    //alert(b.attr("id"));
+    //txtValue = a.textContent || a.innerText;
+    txtValue = b.attr("id");
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "block";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+</script>
+</body>
+</html>

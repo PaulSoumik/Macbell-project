@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+
+	<div class="form_container">
+		
+		<form method="POST" action="{% url 'forms:Company_profile' %}">
+			{% csrf_token %}
+			{{companybase_form.as_p}}
+			{{companyinfo_form.as_p}}
+			<input type="submit" name="" value="submit" style="" class="Company_profile_submit">
+		</form>
+
+	</div>
+</body>
+</html>

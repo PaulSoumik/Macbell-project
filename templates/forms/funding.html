@@ -1,0 +1,20 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div class="container">
+		{% if companyexist %}
+			<form method="POST">
+				{% csrf_token %}
+				{{ fundingpostform.as_p }}
+				<input type="submit" name="">
+				}
+			</form>
+		{% endif %}
+	</div>
+
+</body>
+</html>

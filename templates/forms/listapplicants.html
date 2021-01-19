@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.cover:nth-child(even){
+			background: #efefef;
+		}
+	</style>
+</head>
+<body>
+	<h1>Applicants list:</h1>
+	{% for applicant in alljobapplications.all %}
+	<div class="cover" style="padding: 5px 1rem; width: 95%; font-family: monospace;padding-bottom: 2rem;">
+		<h2 style="font-weight: 600">{{applicant.applicant.username}}</h2>
+		<div class="display" style="display: grid;width: 90%; grid-template-columns: 0.5fr 1fr 1fr;">
+			<div style="text-align: center;">
+			<p>{{applicant.applyas}}</p>
+			</div>
+			<div style="border-left: 1px solid rgba(0,0,0,0.3); padding-left: 1rem">
+			<p>Education:</p>
+			<div style="padding-left: 1rem;">
+				<p>{{applicant.course_name}} at {{applicant.college_name}} </p>
+				<p>Passed : {{ applicant.passing_year|date }}</p>
+				<p>Grade: {{ applicant.grade }}</p>
+			</div>
+			</div>
+			<div style="border-left: 1px solid rgba(0,0,0,0.3); padding-left: 1rem;">
+			<p>About Applicant:</p>
+			<p style="padding-left: 1rem;">     {{ applicant.aboutapplicant }}</p>
+			</div>
+		</div>
+		<div class="button" style="float: right;"> <a href="{% url 'forms:fullapplication' applicant.pk %}">Full Application</a></div>
+	</div>
+	{% endfor %}
+</body>
+</html>

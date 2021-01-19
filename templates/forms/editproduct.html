@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<form action=""  method="POST" >
+					{% csrf_token %}
+					<p><label for="id_prod_name">Prod name:</label> <input type="text" name="prod_name" maxlength="200" id="id_prod_name"></p>
+					<p><label for="id_minimum_no">Minimum no:</label> <input type="text" name="minimum_no" maxlength="10" id="id_minimum_no"></p>
+					<p><label for="id_product_pic">Product pic:</label> <input type="file" name="product_pic" accept="image/*" id="id_product_pic"></p>
+					<p><label for="id_price">Price:</label> <input type="text" name="price" maxlength="5" id="id_price"></p>
+					<p><label for="id_description">Description:</label> <input type="text" name="description" maxlength="300" id="id_description"></p>
+					<input type="submit" name="">
+	</form>
+</body>
+</html>

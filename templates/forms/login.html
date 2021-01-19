@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<form method="post" action="{% url 'users:login' %}">
+          {% csrf_token %}
+          {# A more "HTML" way of creating the login form#}
+
+        <label for="username"><i class="fa fa-user"></i> Username:</label>
+        <input type="text" name="username" placeholder="Username">
+		<label for="password"><i class="fa fa-lock"></i> Password:</label>
+        <input type="password" name="password" placeholder="Password">
+		<input type="submit" name="" value="Login" style="" class="login">
+	</form>
+
+
+</body>
+</html>

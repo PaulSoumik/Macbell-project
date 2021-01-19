@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<h1 style="font-family: monospace;">Full application:</h1>
+
+	<h1 style="text-align: center; font-family: monospace;">{{ fulljobapplication.jobtilte.JobTilte }}</h1>
+	<div class="cover" style="padding: 5px 1rem; width: 95vw; font-family: monospace;padding-bottom: 2rem;">
+		<h1 style="font-weight: 600">{{fulljobapplication.applicant.username}}</h1>
+		<div class="display" style="display: grid;width: 90%; grid-template-columns: 0.5fr 1fr 1fr;">
+			<div style="text-align: center;">
+			<p>{{fulljobapplication.applyas}}</p>
+			</div>
+			<div style=" padding-left: 1rem">
+			<p>Education:</p>
+			<div style="padding-left: 1rem;">
+				<p>{{fulljobapplication.course_name}} at {{fulljobapplication.college_name}} </p>
+				<p>Passed : {{ fulljobapplication.passing_year|date }}</p>
+				<p>Grade: {{ fulljobapplication.grade }}</p>
+			</div>
+			</div>
+			<div style="padding-left: 1rem;">
+			<p>About Applicant:</p>
+			<p style="padding-left: 1rem;">{{ fulljobapplication.aboutapplicant }}</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="work_profile" style="font-family: monospace;">
+		<h3 style="padding-left: 1rem;">Work Experience:</h3>
+		<div class="flexbox" style="display: flex; margin: 0 auto; align-items: center; padding: 0 2rem;" align="center">
+		{% for work in workexp %}
+		<div style="margin: 1rem; border: 1px solid #dedede; border-radius: 0.453rem; padding: 1rem;">
+			<h4>{{ work.Company_name }} Company</h4>
+			<div style="display: flex; flex-wrap: wrap;flex-direction: column;">
+				<p>Post: {{ work.Post }}</p>
+				<p> From {{ work.Start_date|date }} to {{ work.end_date|date }}</p>
+			</div>
+		</div>
+		{% endfor %}
+		</div>
+	</div>
+</body>
+</html>
